@@ -48,6 +48,7 @@ export class TodolistComponent implements OnInit {
 
   onCheck(index:number){
     this.taskArray[index].isCompleted= !this.taskArray[index].isCompleted;
+    
   }
 
 

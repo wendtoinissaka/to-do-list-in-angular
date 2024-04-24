@@ -1,3 +1,18 @@
+###### Accueil
+![home](images/acceuil.png)
+
+###### Ajouter Tâche
+![home](images/capture_1.png)
+
+###### Modifier tâche
+![home](images/capture_2.png)
+
+###### Liste Tâche
+![home](images/capture_3.png)
+
+
+
+
 # Todo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
