@@ -1,0 +1,66 @@
+
+<div class="container mt-5">
+  <h1 class="m-1">Gestion  de tâches </h1>
+<hr/>
+<!-- Bouton pour afficher/cacher le formulaire -->
+<button type="button" class="btn btn-primary my-2" (click)="toggleFormVisibility()">Ajouter une tâche</button>
+
+  <form *ngIf="isFormVisible" (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Tâche</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter la tâche" ngModel name="task" required>
+    <small *ngIf="taskForm.invalid && taskForm.dirty" id="errorMessage" class="form-text text-danger">Champ requis</small>
+    <label for="exampleFormControlTextarea1">Description</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ngModel name="description"></textarea>
+
+  </div>
+
+  <button id="submitButton" type="submit" class="btn btn-primary mt-4"
+  [disabled]="taskForm.invalid"
+  >Ajouter</button>
+</form>
+
+  <hr/>
+<h4 class="my-3 text-center">Liste des tâches </h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr  >
+        <th scope="col">Priorité</th>
+        <th scope="col">Tâches</th>
+        <th scope="col">Description</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of taskArray index as i">
+        <td>{{t.id}}</td>
+        <td>{{t.taskName}}</td>
+        <td>{{t.taskDescription}}</td>
+        <td><input id="myCheckbox" (change)="onCheck(i)" class="mx-3" type="checkbox" aria-label="Checkbox for following text input"></td>
+        <td class="d-flex justify-content-start">
+          <button type="button" class="btn btn-primary btn-sm me-2 mb-1 mb-sm-0" (click)="onEdit(i)">Modifier</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="onDelete(i)">Supprimer</button>
+        </td>
+        
+      </tr>
+    </tbody>
+    
+  </table>
+<!-- Formulaire de modification -->
+
+<div *ngIf="editingIndex > -1" class="edit-form">
+  <h2>Modifier la tâche</h2>
+  <form (ngSubmit)="onSubmitEdit(taskEditForm)" #taskEditForm="ngForm">
+    <div class="form-group">
+      <label for="editTaskName">Tâche</label>
+      <input type="text" class="form-control " id="editTaskName" [(ngModel)]="editedTask.taskName" name="task" required>
+      <label for="editTaskDescription">Description</label>
+      <textarea class="form-control" id="editTaskDescription" rows="3" [(ngModel)]="editedTask.taskDescription" name="description">{{editedTask.taskDescription}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary m-3">Enregistrer</button>
+    <button type="button" class="btn btn-secondary m-3" (click)="onCancelEdit()">Annuler</button>
+  </form>
+</div>
+
+</div>
